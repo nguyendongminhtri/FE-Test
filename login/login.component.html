@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 20px">
+            <mat-card style="margin: 50px 0">
+                <form class="form-login" #f="ngForm"(ngSubmit)="f.form.valid&&ngSubmit()" novalidate>
+                    <mat-error *ngIf="isLoginFailed" class="alert alert-danger">{{status}}</mat-error>
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input name="username" matInput [(ngModel)]="form.username" #username="ngModel"
+                               required minlength="3" maxlength="50" placeholder="username ...">
+                        <mat-icon color="accent" matSuffix>account_circle</mat-icon>
+                        <mat-error *ngIf="username.hasError('required')">The name is required!</mat-error>
+                        <mat-error *ngIf="username.hasError('minlength')">The name must more than 2 character</mat-error>
+                    </mat-form-field><br>
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input name="password" matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="form.password" #password="ngModel" required minlength="6" maxlength="100">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon color="accent">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password.hasError('required')">The password is required</mat-error>
+                        <mat-error *ngIf="password.hasError('minlength')">The password must more than 5 character</mat-error>
+                    </mat-form-field><br>
+                    <button mat-stroked-button color="accent" class="mat-button-toggle-group btn-outline-primary">
+                        <mat-icon color="accent" matPrefix>arrow_right_alt</mat-icon>
+                        Login</button>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
